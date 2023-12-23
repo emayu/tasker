@@ -1,0 +1,6 @@
+server:
+    servlet:
+        context-path: /tasker
+spring:
+    jackson:
+        default-property-inclusion: NON_NULL
