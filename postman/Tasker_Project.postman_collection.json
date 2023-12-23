@@ -10,6 +10,120 @@
 			"name": "User",
 			"item": [
 				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The User has created correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"testing-dynamic-user\",\r\n    \"fullName\": \"John Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create[for-testing]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The User has created correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"testing-dynamic-user\",\r\n    \"fullName\": \"John Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "List",
 					"event": [
 						{
@@ -36,8 +150,8 @@
 									"    pm.expect(jsonData.length).be.greaterThan(0);\r",
 									"    var value = jsonData[0];\r",
 									"    pm.expect(value).has.haveOwnProperty(\"id\");\r",
-									"    pm.expect(value).has.haveOwnProperty(\"username\");\r",
-									"    pm.expect(value).has.not.ownProperty('fullname')\r",
+									"    pm.expect(value).has.haveOwnProperty(\"userName\");\r",
+									"    pm.expect(value).has.ownProperty('fullName')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -85,8 +199,8 @@
 									"pm.test(\"Result has correct data\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"username\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"fullname\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"userName\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"fullName\");\r",
 									"});\r",
 									""
 								],
@@ -114,65 +228,6 @@
 									"key": "id",
 									"value": "1"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									" pm.test(\"Status code returned Created correct\", function () {\r",
-									"     pm.response.to.have.status(201);\r",
-									" });\r",
-									"\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Result is an Object\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.be.an('object');\r",
-									"});\r",
-									"\r",
-									"pm.test(\"The User has created correct\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Delete\")\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testing-dynamic-user\",\r\n    \"fullname\": \"John Doe\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/user",
-							"protocol": "http",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{app_base}}",
-								"user"
 							]
 						}
 					},
@@ -224,266 +279,201 @@
 			"name": "Task",
 			"item": [
 				{
-					"name": "operations",
-					"item": [
+					"name": "Create with User",
+					"event": [
 						{
-							"name": "To Start",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" pm.test(\"Status code returned Created correct\", function () {\r",
-											"     pm.response.to.have.status(202);//Acepted\r",
-											" });\r",
-											"\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"\r",
-											"const jsonData = pm.response.json();\r",
-											"pm.test(\"Result is an Object\", function () {\r",
-											"    pm.expect(jsonData).to.be.an('object');\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The Task has created correct\", function () {\r",
-											"    \r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The status has changed to in progress\", function () {\r",
-											"    pm.expect(jsonData.status).to.eql(\"in-progress\")\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/start",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{app_base}}",
-										"task",
-										":taskId",
-										"start"
-									],
-									"variable": [
-										{
-											"key": "taskId",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "To Done",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" pm.test(\"Status code returned Created correct\", function () {\r",
-											"     pm.response.to.have.status(202);//Acepted\r",
-											" });\r",
-											"\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"\r",
-											"const jsonData = pm.response.json();\r",
-											"pm.test(\"Result is an Object\", function () {\r",
-											"    pm.expect(jsonData).to.be.an('object');\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The Task has created correct\", function () {\r",
-											"    \r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The status has changed to done\", function () {\r",
-											"    pm.expect(jsonData.status).to.eql(\"done\")\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/done",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{app_base}}",
-										"task",
-										":taskId",
-										"done"
-									],
-									"variable": [
-										{
-											"key": "taskId",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "To Pending",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" pm.test(\"Status code returned Created correct\", function () {\r",
-											"     pm.response.to.have.status(202);//Acepted\r",
-											" });\r",
-											"\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"\r",
-											"const jsonData = pm.response.json();\r",
-											"pm.test(\"Result is an Object\", function () {\r",
-											"    pm.expect(jsonData).to.be.an('object');\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The Task has created correct\", function () {\r",
-											"    \r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The status has changed to pending\", function () {\r",
-											"    pm.expect(jsonData.status).to.eql(\"pending\")\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/pending",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{app_base}}",
-										"task",
-										":taskId",
-										"pending"
-									],
-									"variable": [
-										{
-											"key": "taskId",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Assing To",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											" pm.test(\"Status code returned Created correct\", function () {\r",
-											"     pm.response.to.have.status(202);//Acepted\r",
-											" });\r",
-											"\r",
-											"pm.test(\"Content-Type is present\", function () {\r",
-											"    pm.response.to.have.header(\"Content-Type\");\r",
-											"});\r",
-											"\r",
-											"const jsonData = pm.response.json();\r",
-											"pm.test(\"Result is an Object\", function () {\r",
-											"    pm.expect(jsonData).to.be.an('object');\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The Task has created correct\", function () {\r",
-											"    \r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-											"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"The task has the correct user\", function () {\r",
-											"    pm.expect(jsonData.assignedTo).to.eql(\"2\")\r",
-											"});\r",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/assigne/:userId",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}",
-									"path": [
-										"{{app_base}}",
-										"task",
-										":taskId",
-										"assigne",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "taskId",
-											"value": "2"
-										},
-										{
-											"key": "userId",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has initialited as pending\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"PENDING\")\r",
+									"    pm.expect(jsonData.assignedTo).to.eql(1);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task-2\",\r\n    \"description\": \"this is a testing task created from postman with a user\",\r\n    \"assignedTo\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create without user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.not.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has initialited as pending\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"PENDING\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create without[for-testing]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(201);\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.not.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has initialited as pending\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"PENDING\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "List",
@@ -515,7 +505,7 @@
 									"    pm.expect(value).has.haveOwnProperty(\"title\");\r",
 									"    pm.expect(value).has.ownProperty('description');\r",
 									"    pm.expect(value).has.ownProperty('placedAt');\r",
-									"    pm.expect(value).has.ownProperty('state');\r",
+									"    pm.expect(value).has.ownProperty('status');\r",
 									"    pm.expect(value).has.ownProperty('assignedTo');\r",
 									"});\r",
 									"\r",
@@ -529,7 +519,7 @@
 									"    pm.expect(value).has.haveOwnProperty(\"title\");\r",
 									"    pm.expect(value).has.ownProperty('description');\r",
 									"    pm.expect(value).has.ownProperty('placedAt');\r",
-									"    pm.expect(value).has.ownProperty('state');\r",
+									"    pm.expect(value).has.ownProperty('status');\r",
 									"    pm.expect(value).has.not.ownProperty('assignedTo');\r",
 									"});"
 								],
@@ -541,7 +531,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/taks",
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -549,7 +539,7 @@
 							"port": "{{port}}",
 							"path": [
 								"{{app_base}}",
-								"taks"
+								"task"
 							]
 						}
 					},
@@ -585,7 +575,7 @@
 									"    pm.expect(value).has.haveOwnProperty(\"title\");\r",
 									"    pm.expect(value).has.ownProperty('description');\r",
 									"    pm.expect(value).has.ownProperty('placedAt');\r",
-									"    pm.expect(value).has.ownProperty('state');\r",
+									"    pm.expect(value).has.ownProperty('status');\r",
 									"    pm.expect(value).has.ownProperty('assignedTo');\r",
 									"});"
 								],
@@ -597,7 +587,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/taks?assignedTo=jhon",
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task?assignedTo=1",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -605,12 +595,12 @@
 							"port": "{{port}}",
 							"path": [
 								"{{app_base}}",
-								"taks"
+								"task"
 							],
 							"query": [
 								{
 									"key": "assignedTo",
-									"value": "jhon"
+									"value": "1"
 								}
 							]
 						}
@@ -647,9 +637,8 @@
 									"    pm.expect(value).has.haveOwnProperty(\"title\");\r",
 									"    pm.expect(value).has.ownProperty('description');\r",
 									"    pm.expect(value).has.ownProperty('placedAt');\r",
-									"    pm.expect(value).has.ownProperty('state');\r",
+									"    pm.expect(value).has.ownProperty('status');\r",
 									"    pm.expect(value).has.ownProperty('assignedTo');\r",
-									"});ect(value).has.not.ownProperty('fullname')\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -660,7 +649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/taks?sort=title",
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task?sort=title",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -668,7 +657,7 @@
 							"port": "{{port}}",
 							"path": [
 								"{{app_base}}",
-								"taks"
+								"task"
 							],
 							"query": [
 								{
@@ -681,142 +670,7 @@
 					"response": []
 				},
 				{
-					"name": "Create without user",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									" pm.test(\"Status code returned Created correct\", function () {\r",
-									"     pm.response.to.have.status(201);\r",
-									" });\r",
-									"\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"\r",
-									"const jsonData = pm.response.json();\r",
-									"pm.test(\"Result is an Object\", function () {\r",
-									"    \r",
-									"    pm.expect(jsonData).to.be.an('object');\r",
-									"});\r",
-									"\r",
-									"pm.test(\"The Task has created correct\", function () {\r",
-									"    \r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-									"    pm.expect(jsonData).has.not.haveOwnProperty(\"assignedTo\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"The status has initialited as pending\", function () {\r",
-									"    pm.expect(jsonData.status).to.eql(\"pending\")\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Delete\")\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"testing-dynamic-task\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
-							"protocol": "http",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{app_base}}",
-								"task"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create with User",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									" pm.test(\"Status code returned Created correct\", function () {\r",
-									"     pm.response.to.have.status(201);\r",
-									" });\r",
-									"\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"\r",
-									"const jsonData = pm.response.json();\r",
-									"pm.test(\"Result is an Object\", function () {\r",
-									"    \r",
-									"    pm.expect(jsonData).to.be.an('object');\r",
-									"});\r",
-									"\r",
-									"pm.test(\"The Task has created correct\", function () {\r",
-									"    \r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
-									"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
-									"});\r",
-									"\r",
-									"pm.test(\"The status has initialited as pending\", function () {\r",
-									"    pm.expect(jsonData.status).to.eql(\"pending\")\r",
-									"    pm.expect(jsonData.assignedTo).to.eql(\"1\");\r",
-									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Delete\")\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"testing-dynamic-task-2\",\r\n    \"description\": \"this is a testing task created from postman with a user\",\r\n    \"assignedTo\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://{{host}}:{{port}}/{{app_base}}/task",
-							"protocol": "http",
-							"host": [
-								"{{host}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"{{app_base}}",
-								"task"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Copy",
+					"name": "Delete",
 					"event": [
 						{
 							"listen": "test",
@@ -848,7 +702,269 @@
 							"variable": [
 								{
 									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task-operations",
+			"item": [
+				{
+					"name": "To Start",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(202);//Acepted\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has changed to in progress\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"IN_PROGRESS\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/start",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task",
+								":taskId",
+								"start"
+							],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "To Done",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(202);//Acepted\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has changed to done\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"DONE\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/done",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task",
+								":taskId",
+								"done"
+							],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "To Pending",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(202);//Acepted\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"pm.test(\"The status has changed to pending\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"PENDING\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/pending",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task",
+								":taskId",
+								"pending"
+							],
+							"variable": [
+								{
+									"key": "taskId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assing To",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									" pm.test(\"Status code returned Created correct\", function () {\r",
+									"     pm.response.to.have.status(202);//Acepted\r",
+									" });\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"Result is an Object\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The Task has created correct\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"placedAt\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"status\");\r",
+									"    pm.expect(jsonData).has.haveOwnProperty(\"assignedTo\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The task has the correct user\", function () {\r",
+									"    pm.expect(jsonData.assignedTo).to.eql(1)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task/:taskId/assigne/:userId",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task",
+								":taskId",
+								"assigne",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "taskId",
 									"value": "2"
+								},
+								{
+									"key": "userId",
+									"value": "1"
 								}
 							]
 						}
