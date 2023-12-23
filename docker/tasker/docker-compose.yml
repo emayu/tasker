@@ -1,0 +1,26 @@
+version: "3"
+services:
+  tasker-api:
+    image: tasker-api:1.1
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: localdev
+    networks:
+      - tasker-net
+    depends_on:
+      - mysql-db
+ 
+  mysql-db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    networks:
+      - tasker-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlP@ssw0rd
+      - MYSQL_DATABASE=tasker
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+networks:
+  tasker-net:
