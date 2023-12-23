@@ -1,6 +1,26 @@
 # tasker
 This project for managing simple tasks, it has a Rest API for handle tasks and a Angular fronted project
 
+Steps to run this project:
+
+1. Clone this Git repository
+2. Build the application with `mvnw clean package spring-boot:run -pl tasker-rest`
+3. Wait until the server launched successfully and visit `http://localhost:8080/tasker/v1/task`
+4. Play with the Rest API
+
+Important: Minimun version of java 17
+
+## Status
+
+- [x] REST Api implemented
+- [x] Postman runner passed
+- [ ] Front implemented
+- [ ] Wrap on docker
+  - [ ] Configure mysql db
+  - [ ] create images with maven
+
+
+
 
 ## RESTful API and Testing
 
