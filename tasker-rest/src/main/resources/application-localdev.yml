@@ -1,0 +1,13 @@
+server:
+    servlet:
+        context-path: /tasker
+spring:
+    jackson:
+        default-property-inclusion: NON_NULL
+    datasource:
+        url: jdbc:mysql://mysql-db:3306/tasker
+        username: root
+        password: mysqlP@ssw0rd
+    jpa:
+        generate-ddl: true
+        
