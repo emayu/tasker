@@ -1,5 +1,5 @@
 # tasker
-This project for managing simple tasks, it has a Rest API for handle tasks and a Angular fronted project
+Simple task managing project, it has a Rest API for handle tasks and an Angular frontend project 
 
 ## Run this project:
 ### Stand alone
@@ -8,7 +8,7 @@ This project for managing simple tasks, it has a Rest API for handle tasks and a
 3. Wait until the server launched successfully and visit `http://localhost:8080/tasker/v1/task`
 4. Play with the Rest API
 
-## Run with docker compose
+### Run with docker compose
 With docker a mysql database will be used 
 1. move the parent folder of this project 
 2. Build the aplication with `mvnw clean package`
