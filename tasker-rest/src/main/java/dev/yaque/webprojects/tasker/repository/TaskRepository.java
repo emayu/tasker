@@ -17,4 +17,5 @@ import org.springframework.stereotype.Repository;
 
 public interface TaskRepository extends CrudRepository<Task, Long> {
     public List<Task> findByAssignedTo(User assignedTo);
+    public List<Task> findByAssignedToIsNull();
 }

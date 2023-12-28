@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
@@ -37,6 +38,7 @@ import org.springframework.web.server.ResponseStatusException;
  */
 @RestController
 @RequestMapping(path = "/v1/task", produces = "application/json")
+@CrossOrigin(origins = "*")
 public class TaskServiceController extends ControllerFacade<Task, Long> {
     
     private TaskService taskService;
@@ -59,12 +61,8 @@ public class TaskServiceController extends ControllerFacade<Task, Long> {
     
     
     @GetMapping
-    public List<TaskDTO> getAllDTO(@RequestParam(required = false) Long assignedTo) {
-        
-        return StreamSupport
-                .stream(taskService.findAll(assignedTo).spliterator(), true)
-                .map( task -> TaskDTO.toDTO(task))
-                .collect(Collectors.toList());
+    public List<Task> getAllDTO(@RequestParam(required = false) String assignedTo) {
+        return taskService.findAll(assignedTo);
     }    
     
     @GetMapping("/{id}")
