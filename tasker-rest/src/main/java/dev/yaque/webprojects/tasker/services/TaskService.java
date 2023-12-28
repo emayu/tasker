@@ -44,12 +44,18 @@ public class TaskService extends ServiceFacade<Task, Long> {
         return taskRepository.save(task);
     }
     
-    public List<Task> findAll(Long userId){
-        if(userId != null){
-            Optional<User> o = userRepositoy.findById(userId);
-            if(o.isPresent()){
-                return taskRepository.findByAssignedTo(o.get());
-            }else{
+    public List<Task> findAll(String userId) throws NumberFormatException{
+        if ("none".equals(userId)) {
+            return taskRepository.findByAssignedToIsNull();
+        }else if (userId != null){
+            try {
+                Optional<User> o = userRepositoy.findById(Long.valueOf(userId));
+                if (o.isPresent()) {
+                    return taskRepository.findByAssignedTo(o.get());
+                } else {
+                    return java.util.Collections.EMPTY_LIST;
+                }
+            } catch (NumberFormatException ex) {
                 return java.util.Collections.EMPTY_LIST;
             }
         }

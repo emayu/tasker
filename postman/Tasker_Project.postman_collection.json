@@ -32,6 +32,8 @@
 									"pm.test(\"The User has created correct\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(jsonData.userName).to.eql(\"testing-dynamic-user\");\r",
+									"    pm.expect(jsonData.fullName).to.eql(\"John Doe\");\r",
 									"});\r",
 									""
 								],
@@ -101,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userName\": \"testing-dynamic-user\",\r\n    \"fullName\": \"John Doe\"\r\n}",
+							"raw": "{\r\n    \"userName\": \"testing-dynamic-user-2\",\r\n    \"fullName\": \"Sam Smith\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,7 +325,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"testing-dynamic-task-2\",\r\n    \"description\": \"this is a testing task created from postman with a user\",\r\n    \"assignedTo\": 1\r\n}",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task-1\",\r\n    \"description\": \"this is a testing task created from postman with a user\",\r\n    \"assignedTo\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -388,7 +390,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"testing-dynamic-task\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task-2\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,7 +455,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"testing-dynamic-task\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
+							"raw": "{\r\n    \"title\": \"testing-dynamic-task-3\",\r\n    \"description\": \"this is a testing task created from postman\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -601,6 +603,68 @@
 								{
 									"key": "assignedTo",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Not assigned",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result is an Array with data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+									"    pm.expect(jsonData.length).be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Result has correct data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+									"    pm.expect(jsonData.length).be.greaterThan(0);\r",
+									"    var value = jsonData[0];\r",
+									"    pm.expect(value).has.haveOwnProperty(\"id\");\r",
+									"    pm.expect(value).has.haveOwnProperty(\"title\");\r",
+									"    pm.expect(value).has.ownProperty('description');\r",
+									"    pm.expect(value).has.ownProperty('placedAt');\r",
+									"    pm.expect(value).has.ownProperty('status');\r",
+									"    pm.expect(value).has.not.ownProperty('assignedTo');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/{{app_base}}/task?assignedTo=none",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{app_base}}",
+								"task"
+							],
+							"query": [
+								{
+									"key": "assignedTo",
+									"value": "none"
 								}
 							]
 						}
@@ -972,6 +1036,26 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
