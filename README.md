@@ -26,7 +26,10 @@ Important: Minimun version of java 17
 
 - [x] REST Api implemented
 - [x] Postman runner passed
-- [ ] Front implemented
+- [ ] Frontend implemented
+  - [x] Principal view for task
+  - [ ] create task/edit/delete
+  - [ ] create user/edit/delete
 - [ ] Wrap on docker
   - [x] Configure mysql db
   - [ ] create images with maven

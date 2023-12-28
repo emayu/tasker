@@ -1,0 +1,44 @@
+<p>tasks works!</p>
+<button>Create New task</button><br/>
+<label for="filterUser">Show:</label>
+<select #userSelect (change)="onSelectUser(userSelect.value)" >
+    <option default value="" >All</option>
+    <option default value="none" >Not assigned</option>
+    <option *ngFor="let user of userList"
+        value="{{user.id}}" >
+        {{ user.userName }}
+    </option>
+</select>
+<section class="columns">
+    <ul class="column" >
+        <h3>Pending</h3>
+        <li *ngFor="let task of filterPending()" class="note">
+            <b>{{ task.title }}</b>
+            <button style="float: right;">...</button>
+            <p>{{ task.description}}</p>
+            Created: {{ task.placedAt }}<br/>
+            <span *ngIf="task.assignedTo">Assigned to: {{ task.assignedTo.userName }}</span>
+        </li>
+    </ul>
+    
+    <ul class="column">
+        <h3>In Progress</h3>
+        <li *ngFor="let task of filterInProgress()" class="note">
+            <b>{{ task.title }}</b>
+            <button style="float: right;">...</button>
+            <p>{{ task.description}}</p><br/>
+            Created: {{ task.placedAt }}<br/>
+            <span *ngIf="task.assignedTo">Assigned to: {{ task.assignedTo.userName }}</span>
+        </li>
+    </ul>
+    <ul class="column">
+        <h3>Done</h3>
+        <li *ngFor="let task of filterDone()" class="note">
+            <b>{{ task.title }}</b>
+            <button style="float: right;">...</button>
+            <p>{{ task.description}}</p><br/>
+            Created: {{ task.placedAt }}<br/>
+            <span *ngIf="task.assignedTo">Assigned to: {{ task.assignedTo.userName }}</span>
+        </li>
+    </ul>
+</section>
