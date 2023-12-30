@@ -7,3 +7,8 @@ export type Task = {
     status:string;
     placedAt:Date;
 }
+export const TaskStatus = {
+    DONE: "DONE",
+    PENDING: "PENDING",
+    IN_PROGRESS: "IN_PROGRESS"
+}

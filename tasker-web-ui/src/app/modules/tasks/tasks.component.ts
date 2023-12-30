@@ -4,6 +4,7 @@ import { User } from '@data/domain-model/user.type';
 import { TaskService } from '@data/services/task.service';
 import { UserService } from '@data/services/user.service';
 
+
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -52,6 +53,14 @@ export class TasksComponent implements OnInit {
     .subscribe(
       response => this.taskList = response
     )
+  }
+
+  perfomAssignUser(event:Task){
+    console.log("assign user", event);
+  }
+
+  perfomEditTask(task:Task){
+    console.log("Editing task", task);
   }
 
 }

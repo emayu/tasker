@@ -21,4 +21,16 @@ export class TaskService extends CRUDService<Task, BigInt> {
     return this.httpClient.get<Task[]>(`${this.url}`, params);
   }
 
+  startTask(taskId:BigInt):Observable<Task>{
+    return this.httpClient.post<Task>(`${this.url}/${taskId}/start`, {});
+  }
+
+  doneTask(taskId:BigInt):Observable<Task>{
+    return this.httpClient.post<Task>(`${this.url}/${taskId}/done`, {});
+  }
+
+  pendingTask(taskId:BigInt):Observable<Task>{
+    return this.httpClient.post<Task>(`${this.url}/${taskId}/pending`, {});
+  }
+
 }

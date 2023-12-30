@@ -1,0 +1,23 @@
+<b>{{ taskInfo.title }}</b>
+<div ngbDropdown style="float: right;">
+    <button ngbDropdownToggle type="button" class="btn btn-secondary btn-sm" aria->. .</button>
+    <div ngbDropdownMenu>
+        <button ngbDropdownItem (click)="edit()">Edit</button>
+        <button ngbDropdownItem (click)="deleteTask()">Delete</button>
+        <hr><b style="margin-left: 0.5em;">Operations</b>
+        <button ngbDropdownItem type="button" (click)="assignUser()" >Assigne user</button>
+        <b style="margin-left: 0.5em;">Status</b>
+        <button ngbDropdownItem *ngIf="taskInfo.status !== TaskStatus.PENDING" (click)="toPedingTask()">
+            Pending
+        </button>
+        <button ngbDropdownItem *ngIf="taskInfo.status !== TaskStatus.IN_PROGRESS" (click)="toStartTask()">
+            In Progress
+        </button>
+        <button ngbDropdownItem *ngIf="taskInfo.status !== TaskStatus.DONE" (click)="toDoneTask()">
+            Done
+        </button>
+    </div>
+</div>
+<p>{{ taskInfo.description}}</p>
+Created: {{ taskInfo.placedAt }}<br />
+<span *ngIf="taskInfo.assignedTo">Assigned to: {{ taskInfo.assignedTo.userName }}</span>
